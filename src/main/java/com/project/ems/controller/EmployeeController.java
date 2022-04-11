@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.ems.entity.Employee;
 import com.project.ems.services.EmployeeServices;
 
+//this is a controller class
 @RestController
 public class EmployeeController {
 	@Autowired
