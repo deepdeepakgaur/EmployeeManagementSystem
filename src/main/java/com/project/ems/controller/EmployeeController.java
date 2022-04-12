@@ -1,8 +1,11 @@
 package com.project.ems.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,15 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.ems.entity.Employee;
 import com.project.ems.services.EmployeeServices;
 
-//this is a controller class
 @RestController
 public class EmployeeController {
 	@Autowired
 	private EmployeeServices employeeServices;
 	
 	@GetMapping("employee")
-	public List<Employee> getAllEmployee(){
-		return employeeServices.findAllEmployees();
+	public ResponseEntity<List<Employee>> getAllEmployee(){
+		List<Employee> empList = employeeServices.findAllEmployees();
+		if(empList.size()< 1) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.of(Optional.of(empList));
 	}
 	
 	@PostMapping("employee")
@@ -30,18 +36,30 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("employee/email/{empEmail}")
-	public Employee getEmployeeByEmail(@PathVariable ("empEmail") String empEmail){
-		return employeeServices.findEmpByEmail(empEmail);
+	public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable ("empEmail") String empEmail){
+		Employee emp = employeeServices.findEmpByEmail(empEmail);
+		if(emp==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.of(Optional.of(emp));
 	}
 	
 	@GetMapping("employee/phone/{empPhone}")
-	public Employee getEmployeeByPhone(@PathVariable ("empPhone") String empPhone){
-		return employeeServices.findEmpByPhoneNo(empPhone);
+	public ResponseEntity<Employee> getEmployeeByPhone(@PathVariable ("empPhone") String empPhone){
+		Employee emp = employeeServices.findEmpByPhoneNo(empPhone);
+		if(emp==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.of(Optional.of(emp));
 	}
 	
 	@GetMapping("employee/{empId}")
-	public Employee getEmployeeById(@PathVariable ("empId") int empId){
-		return employeeServices.findEmpByID(empId);
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable ("empId") int empId){
+		Employee emp = employeeServices.findEmpByID(empId);
+		if(emp==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.of(Optional.of(emp));
 	}
 	
 	@PutMapping("employee/{empId}")

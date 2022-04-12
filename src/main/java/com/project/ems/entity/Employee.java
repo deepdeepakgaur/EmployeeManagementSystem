@@ -8,17 +8,18 @@ import javax.persistence.Id;
 @Entity
 public class Employee {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private int empId;
 	private String empName;
 	private String empEmail;
 	private String empPhone;
 	private String empAddress;
 	
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", empName=" + empName + ", empEmail=" + empEmail + ", empPhone=" + empPhone
-				+ ", empAddress=" + empAddress + "]";
+	public int getEmpId() {
+		return empId;
+	}
+	public Employee() {
+		super();
 	}
 	public Employee(int empId, String empName, String empEmail, String empPhone, String empAddress) {
 		super();
@@ -28,14 +29,8 @@ public class Employee {
 		this.empPhone = empPhone;
 		this.empAddress = empAddress;
 	}
-	public int getEmpId() {
-		return empId;
-	}
 	public void setEmpId(int empId) {
 		this.empId = empId;
-	}
-	public Employee() {
-		super();
 	}
 	public String getEmpName() {
 		return empName;
@@ -61,5 +56,4 @@ public class Employee {
 	public void setEmpAddress(String empAddress) {
 		this.empAddress = empAddress;
 	}
-
 }

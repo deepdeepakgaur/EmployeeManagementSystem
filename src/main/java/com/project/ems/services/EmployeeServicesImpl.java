@@ -16,12 +16,24 @@ public class EmployeeServicesImpl implements EmployeeServices{
 	
 	//search all employee
 	public List<Employee> findAllEmployees() {
-		return employeeRepository.findAll();
+		List<Employee> empList = null;
+		try {
+			empList = employeeRepository.findAll();
+		} catch (Exception e) { 
+			e.printStackTrace();
+		}
+		return empList;
 	}
 
 	//search employee by empId
 	public Employee findEmpByID(int empID) {
-		return employeeRepository.findById(empID).get();
+		Employee emp = null;
+		try {
+			emp = employeeRepository.findById(empID).get();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return emp;
 	}
 
 	//save new employee
@@ -31,33 +43,56 @@ public class EmployeeServicesImpl implements EmployeeServices{
 
 	//update existing employee by id
 	public Employee updateEmployee(Employee employee, int empID) {
-		Employee emp = employeeRepository.findById(empID).get();
-		if(emp.getEmpId()==empID) {
-			emp.setEmpName(employee.getEmpName());
-			emp.setEmpEmail(employee.getEmpEmail());
-			emp.setEmpAddress(employee.getEmpAddress());
-			emp.setEmpPhone(employee.getEmpPhone());
-		}		
-		return employeeRepository.save(emp);
+		Employee emp = null;
+		try {
+			emp = employeeRepository.findById(empID).get();
+			if(emp.getEmpId()==empID) {
+				emp.setEmpName(employee.getEmpName());
+				emp.setEmpEmail(employee.getEmpEmail());
+				emp.setEmpAddress(employee.getEmpAddress());
+				emp.setEmpPhone(employee.getEmpPhone());
+			}
+			employeeRepository.save(emp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return emp;
 	}
 
 	//delete employee by id
 	public Employee deleteEmployee(int empID) {
-		Employee emp = employeeRepository.findById(empID).get();
-		if(emp.getEmpId()==empID) {
-			employeeRepository.delete(emp);
+		Employee emp = null;
+		try {
+			emp =  employeeRepository.findById(empID).get();
+			if(emp.getEmpId()==empID) {
+				employeeRepository.delete(emp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return emp;
 	}
 
 	//search by emailId
 	public Employee findEmpByEmail(String empEmailId) {
-		return employeeRepository.findByEmpEmail(empEmailId);
+		Employee emp = null;
+		try {
+			emp = employeeRepository.findByEmpEmail(empEmailId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return emp;
 	}
 
 	//search by phone no
 	public Employee findEmpByPhoneNo(String empPhoneNumber) {
-		return employeeRepository.findByEmpPhone(empPhoneNumber);
+		Employee emp = null;
+		try {
+			emp = employeeRepository.findByEmpPhone(empPhoneNumber);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return emp;
 	}
 
 }
