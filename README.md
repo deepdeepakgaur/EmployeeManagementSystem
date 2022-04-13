@@ -89,3 +89,8 @@ OutPut :  {
         "empPhone": "9873216540",
         "empAddress": "New-Delhi"
     }   
+    
+    
+    Date : 13/04/2022
+    task done: you can also assign department to employee
+    yet to come : salary of pirtucal employee
