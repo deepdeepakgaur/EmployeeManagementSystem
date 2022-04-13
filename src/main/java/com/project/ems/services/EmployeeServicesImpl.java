@@ -51,6 +51,7 @@ public class EmployeeServicesImpl implements EmployeeServices{
 				emp.setEmpEmail(employee.getEmpEmail());
 				emp.setEmpAddress(employee.getEmpAddress());
 				emp.setEmpPhone(employee.getEmpPhone());
+				emp.setDepartment(employee.getDepartment());
 			}
 			employeeRepository.save(emp);
 		} catch (Exception e) {
@@ -77,7 +78,7 @@ public class EmployeeServicesImpl implements EmployeeServices{
 	public Employee findEmpByEmail(String empEmailId) {
 		Employee emp = null;
 		try {
-			emp = employeeRepository.findByEmpEmail(empEmailId);
+			emp = employeeRepository.findByEmpEmail(empEmailId);                    
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

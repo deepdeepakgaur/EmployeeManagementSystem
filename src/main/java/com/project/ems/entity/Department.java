@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Department {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int departmentId;
 	private String departmentName;
 	
@@ -34,5 +34,4 @@ public class Department {
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
-	
 }

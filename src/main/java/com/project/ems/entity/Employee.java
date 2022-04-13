@@ -1,33 +1,62 @@
 package com.project.ems.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Employee {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private int empId;
 	private String empName;
 	private String empEmail;
 	private String empPhone;
 	private String empAddress;
 	
-	public int getEmpId() {
-		return empId;
-	}
+	///@OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
+	//private Salary salary;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Department department;
+	
 	public Employee() {
 		super();
 	}
-	public Employee(int empId, String empName, String empEmail, String empPhone, String empAddress) {
+		
+	public Employee(int empId, String empName, String empEmail, String empPhone, String empAddress, 
+			Department department) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
 		this.empEmail = empEmail;
 		this.empPhone = empPhone;
 		this.empAddress = empAddress;
+		//this.salary = salary;
+		this.department = department;
+	}
+
+//	public Salary getSalary() {
+//		return salary;
+//	}
+//
+//	public void setSalary(Salary salary) {
+//		this.salary = salary;
+//	}
+
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	public int getEmpId() {
+		return empId;
 	}
 	public void setEmpId(int empId) {
 		this.empId = empId;
