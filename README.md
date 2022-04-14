@@ -94,3 +94,7 @@ OutPut :  {
    ** Date : 13/04/2022**
     task done: you can also assign department to employee
     yet to come : salary of pirtucal employee
+    
+   ** Date : 14/04/2022**
+    task done: salary of employees
+    yet to come : delete employee (bug)
