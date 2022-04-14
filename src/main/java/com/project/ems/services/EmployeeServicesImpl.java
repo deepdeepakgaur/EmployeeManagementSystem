@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.project.ems.entity.Employee;
 import com.project.ems.repository.EmployeeRepository;
+import com.project.ems.repository.SalaryRepository;
 
 @Service
 public class EmployeeServicesImpl implements EmployeeServices{
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	@Autowired
+	private SalaryRepository salaryRepository;
 	
 	//search all employee
 	public List<Employee> findAllEmployees() {
@@ -52,6 +55,7 @@ public class EmployeeServicesImpl implements EmployeeServices{
 				emp.setEmpAddress(employee.getEmpAddress());
 				emp.setEmpPhone(employee.getEmpPhone());
 				emp.setDepartment(employee.getDepartment());
+				emp.setSalary(employee.getSalary());
 			}
 			employeeRepository.save(emp);
 		} catch (Exception e) {
@@ -66,6 +70,7 @@ public class EmployeeServicesImpl implements EmployeeServices{
 		try {
 			emp =  employeeRepository.findById(empID).get();
 			if(emp.getEmpId()==empID) {
+				
 				employeeRepository.delete(emp);
 			}
 		} catch (Exception e) {

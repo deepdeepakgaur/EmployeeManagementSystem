@@ -2,10 +2,10 @@ package com.project.ems.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -19,17 +19,19 @@ public class Employee {
 	private String empPhone;
 	private String empAddress;
 	
-	///@OneToOne(cascade = CascadeType.ALL, mappedBy = "employee")
-	//private Salary salary;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "salary_id")
+	private Salary salary;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "departmentId")
 	private Department department;
 	
 	public Employee() {
 		super();
 	}
 		
-	public Employee(int empId, String empName, String empEmail, String empPhone, String empAddress, 
+	public Employee(int empId, String empName, String empEmail, String empPhone, String empAddress, Salary salary, 
 			Department department) {
 		super();
 		this.empId = empId;
@@ -37,17 +39,17 @@ public class Employee {
 		this.empEmail = empEmail;
 		this.empPhone = empPhone;
 		this.empAddress = empAddress;
-		//this.salary = salary;
+		this.salary = salary;
 		this.department = department;
 	}
 
-//	public Salary getSalary() {
-//		return salary;
-//	}
-//
-//	public void setSalary(Salary salary) {
-//		this.salary = salary;
-//	}
+	public Salary getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Salary salary) {
+		this.salary = salary;
+	}
 
 	public Department getDepartment() {
 		return department;

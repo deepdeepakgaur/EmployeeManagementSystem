@@ -1,15 +1,11 @@
 package com.project.ems.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Salary {
@@ -18,24 +14,22 @@ public class Salary {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private int salary;
+	private int empSalary;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "empId", nullable = false, unique = true)
+    @OneToOne(mappedBy = "salary")
+    @JsonBackReference
 	private Employee employee;
 	
 	public Salary() {
 		super();
 	}
 
-	public Salary(int id, int salary, Employee employee) {
+	public Salary(int id, int empSalary, Employee employee) {
 		super();
 		this.id = id;
-		this.salary = salary;
+		this.empSalary = empSalary;
 		this.employee = employee;
-	}
-
-	
+	}	
 
 	public int getId() {
 		return id;
@@ -44,13 +38,13 @@ public class Salary {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public float getSalary() {
-		return salary;
+	
+	public int getEmpSalary() {
+		return empSalary;
 	}
 
-	public void setSalary(int salary) {
-		this.salary = salary;
+	public void setEmpSalary(int empSalary) {
+		this.empSalary = empSalary;
 	}
 
 	public Employee getEmployee() {
