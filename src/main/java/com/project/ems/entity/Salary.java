@@ -1,24 +1,34 @@
 package com.project.ems.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Salary {
+public class Salary implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	private int empSalary;
-	
-    @OneToOne(mappedBy = "salary")
+		
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "salary", optional=true)
+    @JoinColumn(name = "empID")
     @JsonBackReference
 	private Employee employee;
+    
+    private int empSalary;
 	
 	public Salary() {
 		super();

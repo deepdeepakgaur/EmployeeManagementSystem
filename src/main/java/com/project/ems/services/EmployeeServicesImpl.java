@@ -54,7 +54,7 @@ public class EmployeeServicesImpl implements EmployeeServices{
 				emp.setEmpEmail(employee.getEmpEmail());
 				emp.setEmpAddress(employee.getEmpAddress());
 				emp.setEmpPhone(employee.getEmpPhone());
-				emp.setDepartment(employee.getDepartment());
+				//emp.setDepartment(employee.getDepartment());
 				emp.setSalary(employee.getSalary());
 			}
 			employeeRepository.save(emp);
